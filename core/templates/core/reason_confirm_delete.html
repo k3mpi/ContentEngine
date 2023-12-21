@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <p>Sind Sie sicher, dass Sie "{{ object }}" löschen möchten?</p>
+    <button type="submit">Löschen</button>
+    <a href="{% url 'list_reasons' %}">Abbrechen</a>
+</form>
+{% endblock %}

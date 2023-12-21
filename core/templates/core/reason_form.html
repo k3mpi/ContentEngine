@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Neuen Grund erstellen</title>
+    <link href="{% static 'path/to/bootstrap.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Neuen Grund erstellen</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Speichern</button>
+        </form>
+    </div>
+</body>
+</html>

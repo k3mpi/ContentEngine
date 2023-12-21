@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+    <title>Content Engine</title>
+    <!-- Fügen Sie hier weitere Head-Elemente wie CSS-Dateien hinzu -->
+    {% load static %}
+    <link href="{% static 'core/styles.css' %}" rel="stylesheet">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+
+    </header>
+    <div class="row">
+        <div class="col-md-2">
+            <aside>
+
+                <!-- Sidebar -->
+                <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+                    <div class="position-sticky">
+                        <div class="list-group list-group-flush mx-3 mt-4">
+                            <a href="{% url 'dashboard' %}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>ContentEngine</span>
+                            </a>
+                             <a href="{% url 'list_posts' %}" class="list-group-item list-group-item-action py-2 ripple">
+                                <i class="fas fa-lock fa-fw me-3"></i><span>Beiträge</span>
+                            </a>
+                            <a href="{% url 'list_ideas' %}" class="list-group-item list-group-item-action py-2 ripple">
+                                <i class="fas fa-chart-area fa-fw me-3"></i><span>Ideen</span>
+                            </a>
+                            <a href="{% url 'list_topics' %}" class="list-group-item list-group-item-action py-2 ripple">
+                                <i class="fas fa-lock fa-fw me-3"></i><span>Topics</span>
+                            </a>
+                             <a href="{% url 'list_reasons' %}" class="list-group-item list-group-item-action py-2 ripple">
+                                <i class="fas fa-lock fa-fw me-3"></i><span>Reasons</span>
+                            </a>
+                            <a href="{% url 'settings' %}" class="list-group-item list-group-item-action py-2 ripple">
+                                <i class="fas fa-chart-line fa-fw me-3"></i><span>Einstellungen</span>
+                            </a>
+                            <a href="{% url 'overview' %}" class="list-group-item list-group-item-action py-2 ripple">
+                                <i class="fas fa-chart-pie fa-fw me-3"></i><span>Übersicht</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </nav>
+            </aside>
+        </div>
+        <div class="col-md-10">
+            <main>
+                {% block content %}
+
+                {% endblock %}
+            </main>
+        </div>
+    </div>
+</body>
+</html>

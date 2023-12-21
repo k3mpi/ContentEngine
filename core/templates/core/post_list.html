@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Beitragsliste</h2>
+<a href="{% url 'create_post' %}">Neuen Post erstellen</a>
+<ul>
+    {% for idea in ideas %}
+    <li>
+        {{ post.id }}: {{ post.topic.name }}
+        <a href="{% url 'update_post' post.id %}">Bearbeiten</a>
+        <a href="{% url 'delete_post' post.id %}">Löschen</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

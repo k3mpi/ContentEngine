@@ -1,0 +1,3 @@
+api_key = "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"
+
+# setx OPENAI_API_KEY "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"
