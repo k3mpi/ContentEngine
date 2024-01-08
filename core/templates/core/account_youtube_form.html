@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_user_name" class="form-label">Instagram Username:</label>
+            {{ form.username }}
+        </div>
+        <div class="mb-3">
+            <label for="id_account_id" class="form-label">Instagram Account ID:</label>
+            {{ form.account_id }}
+        </div>
+        <div class="mb-3">
+            <label for="id_access_token" class="form-label">Access Token:</label>
+            {{ form.access_token }}
+        </div>
+            <div class="mb-3">
+            <label for="id_image" class="form-label">Bild:</label>
+            {{ form.profile_image }}
+        </div>
+        <!-- Weitere Felder mit entsprechenden Labels und Bootstrap-Klassen -->
+        <button type="submit" class="btn btn-primary">Projekt erstellen</button>
+    </form>
+</div>
+{% endblock %}

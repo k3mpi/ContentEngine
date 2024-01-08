@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+<div class="card">
+<div class="card">
+    <h1>Beitrag: {{ post.topic.name }}</h1>
+    <p>{{ post.topic.description }}</p>
+
+    <!-- Liste der Gründe mit Bootstrap-Styling -->
+    <ul class="list-group mb-4">
+        {% for reason in reasons %}
+            <li class="list-group-item">
+                <strong>{{ reason.name }}</strong> - {{ reason.description }}
+            </li>
+        {% endfor %}
+    </ul>
+ </div>
+<div class="card">
+    <!-- Anzeige der Hashtags -->
+    {% if post.hashtags.all %}
+        <h3>Hashtags:</h3>
+        <p>
+            {% for hashtag in post.hashtags.all %}
+                <span class="badge bg-secondary">{{ hashtag.name }}</span>
+            {% endfor %}
+        </p>
+        <h3>Keywords:</h3>
+        <p>
+            {% for keyword in post.keywords.all %}
+                <span class="badge bg-secondary">{{ keyword.name }}</span>
+            {% endfor %}
+        </p>
+             <h3>Meta:</h3>
+        <p>
+
+            <p>{{ post.meta }}</p>
+
+        </p>
+
+
+
+    {% endif %}
+ </div>
+<div class="card">
+ <h2>Video & Images:</h2>
+    <div class="row">
+        <!-- Instagram Post Slider -->
+        <div class="col-md-6">
+            <div id="igSlider" class="mb-4">
+                {% for slide in ig_slides %}
+                    <div>
+                        <img src="{{ slide.png.url }}" class="img-fluid" alt="Slide {{ forloop.counter }}">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Video Player -->
+        <div class="col-md-6">
+            {% if post.Video %}
+                <video controls class="img-fluid">
+                    <source src="{{ MEDIA_URL }}{{ post.Video.videoPath }}" type="video/mp4">
+                    Ihr Browser unterstützt kein Video.
+                </video>
+            {% endif %}
+        </div>
+    </div>
+ </div>
+<div class="card">
+{% if post.article %}
+    <h2>Article:</h2>
+
+    <div>
+        <h5>{{ post.article.title }}</h5>
+        <p>{{ post.article.intro|linebreaks }}</p>
+
+        {% if post.article.subtitle_1 %}
+            <h5>{{ post.article.subtitle_1 }}</h5>
+            <p>{{ post.article.text_1|linebreaks }}</p>
+        {% endif %}
+
+        {% if post.article.subtitle_2 %}
+            <h5>{{ post.article.subtitle_2 }}</h5>
+            <p>{{ post.article.text_2|linebreaks }}</p>
+        {% endif %}
+
+        {% if post.article.subtitle_3 %}
+            <h5>{{ post.article.subtitle_3 }}</h5>
+            <p>{{ post.article.text_3|linebreaks }}</p>
+        {% endif %}
+
+        {% if post.article.cta_title %}
+            <h5>{{ post.article.cta_title }}</h5>
+            <p>{{ post.article.cta_text|linebreaks }}</p>
+        {% endif %}
+    </div>
+{% endif %}
+ </div>
+
+    <!-- Bearbeitungsformulare für Topic und Reasons -->
+    <!-- Ihre bestehenden Formulare -->
+</div>
+    </div>
+{% endblock %}

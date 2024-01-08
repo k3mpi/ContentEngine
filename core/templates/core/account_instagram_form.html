@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_name" class="form-label">Projektname:</label>
+            {{ form.name }}
+        </div>
+        <div class="mb-3">
+            <label for="id_description" class="form-label">Beschreibung:</label>
+            {{ form.description }}
+        </div>
+        <div class="mb-3">
+            <label for="id_image" class="form-label">Bild:</label>
+            {{ form.image }}
+        </div>
+        <!-- Weitere Felder mit entsprechenden Labels und Bootstrap-Klassen -->
+        <button type="submit" class="btn btn-primary">Projekt erstellen</button>
+    </form>
+</div>
+{% endblock %}

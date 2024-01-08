@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <div class="card">
+        <div class="card">
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="{% static 'core/projects.png' %}" alt="Post Icon" style="height: 64px; width: 64px; margin-right: 10px;">
+                </div>
+                <div class="col-md-6">
+                    <h2>Projekte</h2>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn-success" href="{% url 'create_project' %}">Neues Projekt anlegen</a>
+                </div>
+            </div>
+        </div>
+
+    <div class="row">
+        <!-- Tabelle für Beiträge -->
+        <div class="col-12 mb-3 mb-lg-5">
+            <div class="card table-nowrap table-card">
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <tbody>
+                            {% for project in projects %}
+                                <tr class="align-middle">
+                          <td class="font-size-12">{{ project.name }}</td>
+                                <td class="font-size-12">
+                                {% if project.instagram_publications %}
+                                    {{ project.instagram_publications.count }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td class="font-size-12">
+                                {% if project.facebook_publications %}
+                                    {{ project.facebook_publications.count }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td class="font-size-12">
+                                {% if project.pinterest_publications %}
+                                    {{ project.pinterest_publications.count }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td class="font-size-12">
+                                {% if project.youtube_publications %}
+                                    {{ project.youtube_publications.count }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td class="font-size-12">
+                                {% if project.wordpress_publications %}
+                                    {{ project.wordpress_publications.count }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+  <td>
+
+                                        <a href="{% url 'view_project' project.id %}">
+                                            <img src="{% static 'core/edit.png' %}" alt="Edit"class="icon-40px">
+                                        </a>
+                                    </td>
+                                 <td>
+                                        <a href="{% url 'delete_project' project.id %}">
+                                            <img src="{% static 'core/delete.png' %}" alt="Edit"class="icon-40px">
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination usw. -->
+
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        {% if posts.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1" aria-label="First">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
+
+        {% for num in posts.paginator.page_range %}
+            {% if posts.number == num %}
+                <li class="page-item active"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if posts.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ posts.paginator.num_pages }}" aria-label="Last">
+                    <span aria-hidden="true">&raquo;&raquo;</span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+</div>
+           </div>
+
+{% endblock %}
