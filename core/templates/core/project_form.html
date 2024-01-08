@@ -2,54 +2,38 @@
 
 {% block content %}
     <div class="container">
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-
-    <div class="mb-3">
-        <label for="idea_selector" class="form-label">Idee auswählen:</label>
-        <select id="idea_selector" name="idea_selector" class="form-control">
-            {% for idea in ideas %}
-                <option value="{{ idea.id }}">{{ idea.idea }}</option>
-            {% endfor %}
-        </select>
-    </div>
-  <div class="mb-3">
-        <label for="project_selector" class="form-label">Kategorie auswählen:</label>
-        <select id="project_selector" name="project" class="form-control">
-            {% for project in proojects %}
-                <option value="{{ project.id }}">{{ project.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-  <!-- Dropdown für Category -->
-    <div class="mb-3">
-        <label for="category_selector" class="form-label">Kategorie auswählen:</label>
-        <select id="category_selector" name="category" class="form-control">
-            {% for category in categories %}
-                <option value="{{ category.id }}">{{ category.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-  <!-- Dropdown für Idee -->
-    <div class="mb-3">
-        <label for="mode_selector" class="form-label">Stimmung auswählen:</label>
-        <select id="mode_selector" name="mode" class="form-control">
-            {% for mode in modes %}
-                <option value="{{ mode.id }}">{{ mode.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <!-- Dropdown für Theme -->
-    <div class="mb-3">
-        <label for="theme_selector" class="form-label">Theme auswählen:</label>
-        <select id="theme_selector" name="theme" class="form-control">
-            {% for theme in themes %}
-                <option value="{{ theme.id }}">{{ theme.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Generate Post</button>
-</form>
-    </div>
+        <div class="mb-3">
+            <label for="id_name" class="form-label">Projektname:</label>
+            {{ form.name }}
+        </div>
+        <div class="mb-3">
+            <label for="id_description" class="form-label">Beschreibung:</label>
+            {{ form.description }}
+        </div>
+        <div class="mb-3">
+            <label for="id_image" class="form-label">Bild:</label>
+            {{ form.image }}
+        </div>
+        <div class="mb-3">
+            <label for="id_slide_mask_first" class="form-label">Maske für Slides (erster Slide)</label>
+            {{ form.slide_mask_first }}
+        </div>
+     <div class="mb-3">
+            <label for="id_slide_mask_regular" class="form-label">Maske für Slides (regulärer Slide)</label>
+            {{ form.slide_mask_regular }}
+        </div>
+     <div class="mb-3">
+            <label for="id_slide_mask_last" class="form-label">Maske für Slides (letzter Slide)</label>
+            {{ form.slide_mask_last }}
+        </div>
+        <div class="mb-3">
+            <label for="id_watermark" class="form-label">Watermark:</label>
+            {{ form.watermark }}
+        </div>
+        <!-- Weitere Felder mit entsprechenden Labels und Bootstrap-Klassen -->
+        <button type="submit" class="btn btn-primary">Projekt erstellen</button>
+    </form>
+</div>
 {% endblock %}

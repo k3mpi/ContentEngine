@@ -1,29 +1,66 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Ideenliste</h2>
-<a href="{% url 'create_idea' %}">Neue Idee erstellen</a>
 
+{% load static %}
 
 <div class="container">
+    <div class="card">
+        <div class="card">
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="{% static 'core/idea.png' %}" alt="Post Icon" style="height: 64px; width: 64px; margin-right: 10px;">
+                </div>
+                <div class="col-md-6">
+                    <h2>Ideas</h2>
+                </div>
+                <div class="col-md-2">
+                    <a class="btn btn-success" href="{% url 'create_idea' %}">Eigene Idee</a>
+                </div>
+                <div class="col-md-2">
+                    <a class="btn btn-success" href="{% url 'get_ideas' %}">Ideen finden</a>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+        <div class="row">
+
+            <h3>Trending Keywords in Deutschland (Google Trends) </h3>
+            <p></p>
+            <p>
+                {% for keyword in trending_keywords %}
+                    <span class="badge bg-secondary">{{ keyword }}</span>
+                {% endfor %}
+            </p>
+
+        </div>
+    </div>
+    <div class="card">
+            <div class="row">
+                <form method="get" action="{% url 'list_ideas' %}" class="mb-3">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <select name="sort" class="form-control">
+                                <option value="datetime_asc">Datum aufsteigend</option>
+                                <option value="datetime_desc">Datum absteigend</option>
+                            </select>
+                        </div>
+                        <div class="col-md-8">
+                            <button type="submit" class="btn btn-primary">Filtern und sortieren</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
     <div class="row">
         <div class="col-12 mb-3 mb-lg-5">
             <div class="position-relative card table-nowrap table-card">
-                <div class="card-header align-items-center">
-                    <h5 class="mb-0">Latest Transactions</h5>
-                    <p class="mb-0 small text-muted">1 Pending</p>
-                </div>
+
                 <div class="table-responsive">
                     <table class="table mb-0">
-                        <thead class="small text-uppercase bg-body text-muted">
-                            <tr>
-                                <th>ID</th>
-                                <th>Titel</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                   <tbody>
                             {% for idea in ideas %}
 
                                 <tr class="align-middle">
@@ -32,6 +69,9 @@
                                     </td>
                                     <td>
                                         {{ idea.idea }}
+                                    </td>
+                                     <td>
+                                        {{ idea.datetime }}
                                     </td>
                                  <td>
                                     <a class="btn btn-primary" href="{% url 'update_idea' idea.id %}">Bearbeiten</a>
@@ -49,7 +89,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
     <!-- Vorheriger Code -->
 
@@ -90,7 +130,8 @@
         {% endif %}
     </ul>
 </nav>
-
+</div>
+    </div>
 <!-- Weiterer Code -->
 
 

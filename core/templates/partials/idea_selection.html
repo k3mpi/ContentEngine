@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+    <div class="container mt-3">
+        <h1>Wählen Sie die Ideen aus, die Sie speichern möchten</h1>
+        <form method="post" class="mt-3">
+            {% csrf_token %}
+            {% for idea in ideas %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="selected_ideas" value="{{ idea }}" id="idea-{{ forloop.counter }}">
+                    <label class="form-check-label" for="idea-{{ forloop.counter }}">
+                        {{ idea }}
+                    </label>
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary mt-2">Ideen speichern</button>
+        </form>
+    </div>
+{% endblock %}

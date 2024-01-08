@@ -1,47 +1,68 @@
 {% extends 'base.html' %}
+{%  load static %}
 
 {% block content %}
 <div class="container mt-4">
 <div class="card">
 <div class="card">
-    <h1>Beitrag: {{ post.topic.name }}</h1>
-    <p>{{ post.topic.description }}</p>
+    <h1>Projekt: {{ project.name }}</h1>
 
-    <!-- Liste der Gründe mit Bootstrap-Styling -->
-    <ul class="list-group mb-4">
-        {% for reason in reasons %}
-            <li class="list-group-item">
-                <strong>{{ reason.name }}</strong> - {{ reason.description }}
-            </li>
-        {% endfor %}
-    </ul>
+
  </div>
 <div class="card">
-    <!-- Anzeige der Hashtags -->
-    {% if post.hashtags.all %}
-        <h3>Hashtags:</h3>
-        <p>
-            {% for hashtag in post.hashtags.all %}
-                <span class="badge bg-secondary">{{ hashtag.name }}</span>
-            {% endfor %}
-        </p>
-        <h3>Keywords:</h3>
-        <p>
-            {% for keyword in post.keywords.all %}
-                <span class="badge bg-secondary">{{ keyword.name }}</span>
-            {% endfor %}
-        </p>
-             <h3>Meta:</h3>
-        <p>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <tbody>
 
-            <p>{{ post.meta }}</p>
+                        <tr class="align-middle">
 
-        </p>
+                            <td class="font-size-12">
+                                <img src="{% static 'core/instagram_published.png' %}" alt="Instagram" class="icon-40px">
+                            </td>
+                            <td class="font-size-12">
+                                <img src="{{ project.instagram_account.profile_image.url }}" alt="{{ project.instagram_account.username }}" class="icon-40px">
+                            </td>
+                            <td class="font-size-12">{{ project.instagram_account.username }}</td>
 
+                        </tr>
+                        <tr class="align-middle">
 
+                            <td class="font-size-12">
+                                <img src="{% static 'core/facebook_published.png' %}" alt="Instagram" class="icon-40px">
+                            </td>
+                            <td class="font-size-12">
+                                <img src="{{ project.facebook_account.profile_image.url }}" alt="{{ project.facebook_account.username }}" class="icon-40px">
+                            </td>
+                            <td class="font-size-12">{{ project.facebook_account.username }}</td>
 
-    {% endif %}
- </div>
+                        </tr>
+                        <tr class="align-middle">
+
+                            <td class="font-size-12">
+                                <img src="{% static 'core/pinterest_published.png' %}" alt="Instagram" class="icon-40px">
+                            </td>
+                            <td class="font-size-12">
+                                <img src="{{ project.pinterest_account.profile_image.url }}" alt="{{project.pinterest_account.username }}" class="icon-40px">
+                            </td>
+                            <td class="font-size-12">{{ project.pinterest_account.username }}</td>
+
+                        </tr>
+                        <tr class="align-middle">
+
+                            <td class="font-size-12">
+                                <img src="{% static 'core/youtube_published.png' %}" alt="Instagram" class="icon-40px">
+                            </td>
+                            <td class="font-size-12">
+                                <img src="{{ project.youtube_account.profile_image.url }}" alt="{{ project.youtube_account.username }}" class="icon-40px">
+                            </td>
+                            <td class="font-size-12">{{ project.youtube_account.username }}</td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
 <div class="card">
  <h2>Video & Images:</h2>
     <div class="row">

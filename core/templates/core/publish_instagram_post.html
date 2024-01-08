@@ -7,18 +7,27 @@
     <div class="card">
         <div class="card-body">
             <h1>Instagram Post veröffentlichen</h1>
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Veröffentlichen</button>
-            </form>
+     <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <select id="type_select" name="post_type" class="form-select">
+                <option value="1">Bild</option>
+                <option value="2">Video</option>
+                <option value="3">Slider</option>
+                <!-- Option 4 hier, falls benötigt -->
+            </select>
+        </div>
+        <!-- Fügen Sie hier weitere Formularfelder hinzu, falls erforderlich -->
+        <button type="submit" class="btn btn-primary">Veröffentlichen</button>
+    </form>
         </div>
     </div>
 
     <!-- Hier fügen Sie die Details des Posts ein, ähnlich wie im Template 'view_post' -->
 
 <div class="card">
-    <h1>Beitrag: {{ post.topic.name }}</h1>
+    <h2>Beitrag Prüfen:</h2>
+    <h4>{{ post.topic.name }}</h4>
     <p>{{ post.topic.description }}</p>
 
     <!-- Liste der Gründe mit Bootstrap-Styling -->

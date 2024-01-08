@@ -2,6 +2,18 @@
 
 {% block content %}
 {% load static %}
+    <script>
+$(document).ready(function(){
+    $('.slick-slider').slick({
+        dots: true,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 1,
+        adaptiveHeight: true
+    });
+});
+</script>
+
 
 <div class="container">
     <div class="card">
@@ -43,76 +55,42 @@
                 </form>
             </div>
         </div>
+
+
     <div class="row">
-        <!-- Tabelle für Beiträge -->
-        <div class="col-12 mb-3 mb-lg-5">
-            <div class="card table-nowrap table-card">
-                <div class="table-responsive">
-                    <table class="table mb-0">
-                        <tbody>
-                            {% for post in posts %}
-                                <tr class="align-middle">
-                                    <td class="font-size-12">{{ post.topic.name }}</td>
-                                    <td class="font-size-12">{{ post.datetime }}</td>
+        {% for ig_post in ig_posts %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div id="igSlider-{{ ig_post.id }}" class="slick-slider">
+                    {% for slide in ig_post.igslide_set.all %}
+                    <div>
+                        <img src="{{ slide.png.url }}" class="d-block w-100" alt="Slide {{ forloop.counter }}">
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                             <span class="badge bg-secondary">{{ ig_post.get_post_category }}</span>
 
-                                   <td>
-                                        <a href="{% url 'create_audio' post.id %}">
-                                            <img src="{% if post.audio %}{% static 'core/audio_update.png' %}{% else %}{% static 'core/audio_create.png' %}{% endif %}" alt="SEO"class="icon-40px">
-                                        </a>
-                                   </td>
-                                   <td>
-                                        <a href="{% url 'create_seo' post.id %}">
-                                            <img src="{% if post.hashtags.exists %}{% static 'core/seo_update.png' %}{% else %}{% static 'core/seo_create.png' %}{% endif %}" alt="SEO"class="icon-40px">
-                                        </a>
-                                   </td>
-                                        <td>
-                                        <a href="{% url 'create_ig_video' post.id %}">
-                                            <img src="{% if post.Video %}{% static 'core/vid_short_update.png' %}{% else %}{% static 'core/vid_short_create.png' %}{% endif %}" alt="SEO"class="icon-40px">
-                                        </a>
-                                   </td>
 
-                                    <td>
-                                        <a href="{% url 'create_long_video' post.id %}">
-                                            <img src="{% if post.Video %}{% static 'core/vid_long_update.png' %}{% else %}{% static 'core/vid_long_create.png' %}{% endif %}" alt="SEO"class="icon-40px">
-                                        </a>
-                                   </td>
+                        </div>
+                            <div class="col-md-6">
+                             <span class="badge bg-secondary">{{ ig_post.datetime}}</span>
 
-                                    <td>
-                                        <a href="{% url 'create_ig_post' post.id %}">
-                                            <img src="{% if post.IGPost %}{% static 'core/slides_update.png' %}{% else %}{% static 'core/slides_create.png' %}{% endif %}" alt="SEO"class="icon-40px">
-                                        </a>
-                                   </td>
 
-                                    <td>
-                                        <a href="{% url 'create_article' post.id %}">
-                                            <img src="{% if post.hashtags.exists %}{% static 'core/blog_post_update.png' %}{% else %}{% static 'core/blog_post_create.png' %}{% endif %}" alt="SEO"class="icon-40px">
-                                        </a>
+                        </div>
 
-                                    </td>
-                                    <td>
-                                        <a href="{% url 'create_ig_post' post.id %}">
-                                            <img src="{% if post.hashtags.exists %}{% static 'core/update_all.png' %}{% else %}{% static 'core/create_all.png' %}{% endif %}" alt="SEO"class="icon-40px">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{% url 'view_post' post.id %}">
-                                            <img src="{% static 'core/edit.png' %}" alt="Edit"class="icon-40px">
-                                        </a>
-                                    </td>
-                                 <td>
-                                        <a href="{% url 'delete_post' post.id %}">
-                                            <img src="{% static 'core/delete.png' %}" alt="Edit"class="icon-40px">
-                                        </a>
-                                    </td>
+                    </div>
 
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                    <h6 class="card-title">{{ ig_post.title }}</h6>
+
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
+
 
     <!-- Pagination usw. -->
 
@@ -155,5 +133,7 @@
 </nav>
 </div>
            </div>
+
+
 
 {% endblock %}

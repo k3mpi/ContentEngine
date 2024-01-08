@@ -1,168 +1,61 @@
 {% extends 'base.html' %}
-
-{% block content %}
 {% load static %}
 
+{% block content %}
 <div class="container">
     <div class="card">
         <div class="card">
-            <div class="row">
-                <div class="col-md-2">
-                    <img src="{% static 'core/post.png' %}" alt="Post Icon" style="height: 64px; width: 64px; margin-right: 10px;">
-                </div>
-                <div class="col-md-6">
-                    <h2>Beiträge: Bearbeiten</h2>
-                </div>
-                <div class="col-md-4">
-                    <a class="btn btn-success" href="{% url 'create_post' %}">Beitrag aus Idee erstellen</a>
-                </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Accounts</h2>
+                <a class="btn btn-primary" href="{% url 'create_pinterest_account' %}">Pinterest Account hinzufügen</a>
+                <a class="btn btn-primary" href="{% url 'create_facebook_account' %}">Facebook Account hinzufügen</a>
+                <a class="btn btn-primary" href="{% url 'create_instagram_account' %}">Instagram Account hinzufügen</a>
+                <a class="btn btn-primary" href="{% url 'create_youtube_account' %}">YouTube Account hinzufügen</a>
             </div>
+        </div>
         </div>
         <div class="card">
-            <div class="row">
-                <form method="get" action="{% url 'list_posts' %}" class="mb-3">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <select name="category" class="form-control">
-                                <option value="">Alle Kategorien</option>
-                                {% for category in categories %}
-                                    <option value="{{ category.id }}">{{ category.name }}</option>
-                                {% endfor %}
-                            </select>
-                         </div>
-                         <div class="col-md-3">
-                            <select name="project" class="form-control">
-                                <option value="">Alle Projekte</option>
-                                {% for project in projects %}
-                                    <option value="{{ project.id }}">{{ project.name }}</option>
-                                {% endfor %}
-                            </select>
-
-                        </div>
-                        <div class="col-md-3">
-                            <select name="sort" class="form-control">
-                                <option value="datetime_asc">Datum aufsteigend</option>
-                                <option value="datetime_desc">Datum absteigend</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <button type="submit" class="btn btn-primary">Filtern und sortieren</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    <div class="row">
-        <!-- Tabelle für Beiträge -->
-        <div class="col-12 mb-3 mb-lg-5">
-            <div class="card table-nowrap table-card">
-                <div class="table-responsive">
-                    <table class="table mb-0">
-                        <tbody>
-                            {% for post in posts %}
-                                <tr class="align-middle">
-                                    <td class="font-size-12">{{ post.topic.name }}</td>
-                                    <td class="font-size-12">{{ post.datetime }}</td>
-
-                                   <td>
-                                        <a href="{% url 'create_audio' post.id %}">
-                                            <img src="{% if post.audio %}{% static 'core/audio_update.png' %}{% else %}{% static 'core/audio_create.png' %}{% endif %}" alt="SEO"class="icon-40px">
-                                        </a>
-                                   </td>
-                                   <td>
-                                        <a href="{% url 'create_seo' post.id %}">
-                                            <img src="{% if post.hashtags.exists %}{% static 'core/seo_update.png' %}{% else %}{% static 'core/seo_create.png' %}{% endif %}" alt="SEO"class="icon-40px">
-                                        </a>
-                                   </td>
-                                        <td>
-                                        <a href="{% url 'create_ig_video' post.id %}">
-                                            <img src="{% if post.Video %}{% static 'core/vid_short_update.png' %}{% else %}{% static 'core/vid_short_create.png' %}{% endif %}" alt="SEO"class="icon-40px">
-                                        </a>
-                                   </td>
-
-                                    <td>
-                                        <a href="{% url 'create_long_video' post.id %}">
-                                            <img src="{% if post.Video %}{% static 'core/vid_long_update.png' %}{% else %}{% static 'core/vid_long_create.png' %}{% endif %}" alt="SEO"class="icon-40px">
-                                        </a>
-                                   </td>
-
-                                    <td>
-                                        <a href="{% url 'create_ig_post' post.id %}">
-                                            <img src="{% if post.IGPost %}{% static 'core/slides_update.png' %}{% else %}{% static 'core/slides_create.png' %}{% endif %}" alt="SEO"class="icon-40px">
-                                        </a>
-                                   </td>
-
-                                    <td>
-                                        <a href="{% url 'create_article' post.id %}">
-                                            <img src="{% if post.hashtags.exists %}{% static 'core/blog_post_update.png' %}{% else %}{% static 'core/blog_post_create.png' %}{% endif %}" alt="SEO"class="icon-40px">
-                                        </a>
-
-                                    </td>
-                                    <td>
-                                        <a href="{% url 'create_ig_post' post.id %}">
-                                            <img src="{% if post.hashtags.exists %}{% static 'core/update_all.png' %}{% else %}{% static 'core/create_all.png' %}{% endif %}" alt="SEO"class="icon-40px">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{% url 'view_post' post.id %}">
-                                            <img src="{% static 'core/edit.png' %}" alt="Edit"class="icon-40px">
-                                        </a>
-                                    </td>
-                                 <td>
-                                        <a href="{% url 'delete_post' post.id %}">
-                                            <img src="{% static 'core/delete.png' %}" alt="Edit"class="icon-40px">
-                                        </a>
-                                    </td>
-
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <tbody>
+                       {% for account in accounts %}
+                        <tr class="align-middle">
+                            <td class="font-size-12">{{ account.username }}</td>
+                            <td class="font-size-12">
+                                <!-- Entsprechendes Icon basierend auf der Account-Klasse anzeigen -->
+                                {% if account.get_class_name == 'Instagram' %}
+                                    <img src="{% static 'core/instagram_published.png' %}" alt="Instagram" class="icon-40px">
+                                {% elif account.get_class_name == 'Facebook' %}
+                                    <img src="{% static 'core/facebook_published.png' %}" alt="Facebook" class="icon-40px">
+                                {% elif account.get_class_name == 'Pinterest' %}
+                                    <img src="{% static 'core/pinterest_published.png' %}" alt="Pinterest" class="icon-40px">
+                                {% elif account.get_class_name == 'Youtube' %}
+                                    <img src="{% static 'core/youtube_published.png' %}" alt="Youtube" class="icon-40px">
+                                {% endif %}
+                            </td>
+                            <td class="font-size-12">
+                                <!-- Profilbild anzeigen, falls vorhanden -->
+                                {% if account.profile_image %}
+                                    <img src="{{ account.profile_image.url }}" alt="{{ account.username }}" class="icon-40px">
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url account.get_update_url pk=account.id %}">
+                                    <img src="{% static 'core/edit.png' %}" alt="Edit" class="icon-40px">
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url account.get_delete_url pk=account.id %}">
+                                    <img src="{% static 'core/delete.png' %}" alt="Delete" class="icon-40px">
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-
-    <!-- Pagination usw. -->
-
-<nav aria-label="Page navigation">
-    <ul class="pagination">
-        {% if posts.has_previous %}
-            <li class="page-item">
-                <a class="page-link" href="?page=1" aria-label="First">
-                    <span aria-hidden="true">&laquo;&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-        {% endif %}
-
-        {% for num in posts.paginator.page_range %}
-            {% if posts.number == num %}
-                <li class="page-item active"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-            {% else %}
-                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-            {% endif %}
-        {% endfor %}
-
-        {% if posts.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="?page={{ posts.paginator.num_pages }}" aria-label="Last">
-                    <span aria-hidden="true">&raquo;&raquo;</span>
-                </a>
-            </li>
-        {% endif %}
-    </ul>
-</nav>
 </div>
-           </div>
-
 {% endblock %}

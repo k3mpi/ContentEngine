@@ -1,9 +1,63 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="container">
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Speichern</button>
+
+    <div class="mb-3">
+        <label for="idea_selector" class="form-label">Idee auswählen:</label>
+        <select id="idea_selector" name="idea_selector" class="form-control">
+            {% for idea in ideas %}
+                <option value="{{ idea.id }}">{{ idea.idea }}</option>
+            {% endfor %}
+        </select>
+    </div>
+ <div class="mb-3">
+        <label for="type_selector" class="form-label">Beitrags Typ auswählen:</label>
+        <select id="type_selector" name="type_selector" class="form-control">
+            {% for type in post_types %}
+                <option value="{{ type.id }}">{{ type.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+  <div class="mb-3">
+        <label for="project_selector" class="form-label">Projekt auswählen:</label>
+        <select id="project_selector" name="project_selector" class="form-control">
+            {% for project in projects %}
+                <option value="{{ project.id }}">{{ project.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+  <!-- Dropdown für Category -->
+    <div class="mb-3">
+        <label for="category_selector" class="form-label">Kategorie auswählen:</label>
+        <select id="category_selector" name="category" class="form-control">
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+  <!-- Dropdown für Idee -->
+    <div class="mb-3">
+        <label for="mode_selector" class="form-label">Stimmung auswählen:</label>
+        <select id="mode_selector" name="mode" class="form-control">
+            {% for mode in modes %}
+                <option value="{{ mode.id }}">{{ mode.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <!-- Dropdown für Theme -->
+    <div class="mb-3">
+        <label for="theme_selector" class="form-label">Theme auswählen:</label>
+        <select id="theme_selector" name="theme" class="form-control">
+            {% for theme in themes %}
+                <option value="{{ theme.id }}">{{ theme.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Generate Post</button>
 </form>
+    </div>
 {% endblock %}

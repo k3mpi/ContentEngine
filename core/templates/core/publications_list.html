@@ -11,10 +11,10 @@
                     <img src="{% static 'core/projects.png' %}" alt="Post Icon" style="height: 64px; width: 64px; margin-right: 10px;">
                 </div>
                 <div class="col-md-6">
-                    <h2>Projekte</h2>
+                    <h2>Publikationen</h2>
                 </div>
                 <div class="col-md-4">
-                    <a class="btn btn-success" href="{% url 'create_project' %}">Neues Projekt anlegen</a>
+
                 </div>
             </div>
         </div>
@@ -26,9 +26,9 @@
                 <div class="table-responsive">
                     <table class="table mb-0">
                         <tbody>
-                            {% for project in projects %}
+                            {% for publication in publications %}
                                 <tr class="align-middle">
-                          <td class="font-size-12">{{ project.name }}</td>
+                          <td class="font-size-12">{{ publication.name }}</td>
                                 <td class="font-size-12">
                                 {% if project.instagram_publications %}
                                     {{ project.instagram_publications.count }}
